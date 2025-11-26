@@ -42,6 +42,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ settings, onSave }) 
           reader.readAsDataURL(file);
       }
   };
+
+  const handleFaviconUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              setLocalSettings(s => ({...s, favicon: reader.result as string}));
+          };
+          reader.readAsDataURL(file);
+      }
+  };
   
   const formInputClass = "w-full bg-white border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-sm p-2";
 
@@ -78,6 +89,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ settings, onSave }) 
                     {localSettings.logo && <img src={localSettings.logo} alt="Business Logo" className="h-16 w-16 object-contain rounded-md bg-slate-100" />}
                     <input type="file" accept="image/*" onChange={handleLogoUpload} className="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"/>
                 </div>
+               </div>
+               <div>
+                <label className="block text-sm font-semibold text-slate-600 mb-1">Website Favicon</label>
+                <div className="mt-1 flex items-center space-x-4">
+                    {localSettings.favicon && <img src={localSettings.favicon} alt="Favicon" className="h-8 w-8 object-contain rounded-md border border-slate-200" />}
+                    <input type="file" accept="image/x-icon,image/png,image/svg+xml,image/jpeg" onChange={handleFaviconUpload} className="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"/>
+                </div>
+                <p className="text-xs text-slate-400 mt-1">Upload a small image to display in the browser tab (PNG, ICO).</p>
                </div>
           </div>
 

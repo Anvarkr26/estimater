@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Header } from './components/Header';
 import { DashboardView } from './components/DashboardView';
 import { EstimateView } from './components/EstimateView';
@@ -17,6 +17,7 @@ const App: React.FC = () => {
     phone: '99422 23545',
     email: 'bashabedmart@gmail.com',
     logo: '',
+    favicon: '',
     currency: '₹',
     defaultTerms: 'Thank you for your business!',
     paymentUPI: '',
@@ -32,6 +33,19 @@ const App: React.FC = () => {
   });
   
   const [activeDocumentId, setActiveDocumentId] = useState<string | null>(null);
+
+  // Apply Favicon Effect
+  useEffect(() => {
+    if (settings.favicon) {
+      let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = settings.favicon;
+    }
+  }, [settings.favicon]);
 
   const getNextDocNumber = useCallback((type: 'estimate' | 'bill') => {
     const docsOfType = documents.filter(d => d.type === type);

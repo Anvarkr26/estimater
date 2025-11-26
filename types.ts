@@ -114,6 +114,7 @@ export interface SettingsProfile {
   phone: string;
   email: string;
   logo: string; // base64 string
+  favicon?: string; // base64 string
   currency: string;
   defaultTerms: string;
   paymentUPI?: string;
