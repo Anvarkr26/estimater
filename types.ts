@@ -100,6 +100,14 @@ export interface Bill extends BaseDocument {
 
 export type Document = Estimate | Bill;
 
+export interface FontSizes {
+  businessName: number;
+  docTitle: number;
+  heading: number; // Section headers like "Bill To", Table Headers
+  body: number; // General text
+  total: number; // The grand total amount
+}
+
 export interface SettingsProfile {
   businessName: string;
   address: string;
@@ -112,4 +120,5 @@ export interface SettingsProfile {
   // Visual Customization
   themeColor: string;
   fontFamily: string;
+  fontSizes: FontSizes;
 }

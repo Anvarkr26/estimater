@@ -16,6 +16,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ settings, onSave }) 
     setLocalSettings(s => ({ ...s, [name]: value }));
   };
 
+  const handleFontSizeChange = (key: keyof SettingsProfile['fontSizes'], value: number) => {
+    setLocalSettings(s => ({
+      ...s,
+      fontSizes: {
+        ...s.fontSizes,
+        [key]: value
+      }
+    }));
+  };
+  
   const handleSave = () => {
     onSave(localSettings);
     setIsSaved(true);
@@ -103,6 +113,60 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ settings, onSave }) 
                    </div>
               </div>
           </div>
+
+           <hr className="border-slate-200" />
+           
+           {/* Font Size Customization */}
+           <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-slate-700">Typography Sizing (px)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 <div>
+                    <label className="block text-sm font-semibold text-slate-600 mb-1">Business Name</label>
+                    <input 
+                        type="number" 
+                        value={localSettings.fontSizes?.businessName || 30} 
+                        onChange={(e) => handleFontSizeChange('businessName', parseInt(e.target.value))} 
+                        className={formInputClass}
+                    />
+                 </div>
+                 <div>
+                    <label className="block text-sm font-semibold text-slate-600 mb-1">Doc Title (e.g. ESTIMATE)</label>
+                    <input 
+                        type="number" 
+                        value={localSettings.fontSizes?.docTitle || 48} 
+                        onChange={(e) => handleFontSizeChange('docTitle', parseInt(e.target.value))} 
+                        className={formInputClass}
+                    />
+                 </div>
+                 <div>
+                    <label className="block text-sm font-semibold text-slate-600 mb-1">Section Headers</label>
+                    <input 
+                        type="number" 
+                        value={localSettings.fontSizes?.heading || 12} 
+                        onChange={(e) => handleFontSizeChange('heading', parseInt(e.target.value))} 
+                        className={formInputClass}
+                    />
+                 </div>
+                 <div>
+                    <label className="block text-sm font-semibold text-slate-600 mb-1">Body Text</label>
+                    <input 
+                        type="number" 
+                        value={localSettings.fontSizes?.body || 14} 
+                        onChange={(e) => handleFontSizeChange('body', parseInt(e.target.value))} 
+                        className={formInputClass}
+                    />
+                 </div>
+                 <div>
+                    <label className="block text-sm font-semibold text-slate-600 mb-1">Grand Total</label>
+                    <input 
+                        type="number" 
+                        value={localSettings.fontSizes?.total || 18} 
+                        onChange={(e) => handleFontSizeChange('total', parseInt(e.target.value))} 
+                        className={formInputClass}
+                    />
+                 </div>
+              </div>
+           </div>
 
            <hr className="border-slate-200" />
 

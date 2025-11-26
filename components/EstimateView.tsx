@@ -306,9 +306,20 @@ export const EstimateView: React.FC<EstimateViewProps> = ({ activeDocument, onSa
             {/* Document Header & Customer Info Card */}
             <div className="bg-white shadow-md rounded-xl p-6 md:p-8">
                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
-                    <h2 className="text-2xl font-bold text-slate-800 capitalize">
-                        {activeDocument ? `Editing ${doc.type} #${doc.number}` : `New ${doc.type}`}
-                    </h2>
+                    <div className="flex items-center gap-2">
+                         <h2 className="text-2xl font-bold text-slate-800 capitalize">
+                            {doc.type} #
+                        </h2>
+                        <input
+                            type="text"
+                            name="number"
+                            value={doc.number}
+                            onChange={handleInputChange}
+                            className="text-2xl font-bold text-slate-800 bg-transparent border-b-2 border-slate-200 focus:border-emerald-500 focus:outline-none w-48 transition-colors placeholder:text-slate-300"
+                            placeholder="Number"
+                        />
+                    </div>
+                    
                     {!activeDocument && (
                         <div className="w-full sm:w-52">
                             <TypeSwitcher value={doc.type} onChange={handleTypeChange} />

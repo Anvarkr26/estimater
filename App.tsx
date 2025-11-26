@@ -22,6 +22,13 @@ const App: React.FC = () => {
     paymentUPI: '',
     themeColor: '#059669', // Emerald 600
     fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+    fontSizes: {
+      businessName: 30,
+      docTitle: 48,
+      heading: 12,
+      body: 14,
+      total: 18
+    }
   });
   
   const [activeDocumentId, setActiveDocumentId] = useState<string | null>(null);
